@@ -1,12 +1,14 @@
 # SimpleTable
-A simple jQuery script to ajaxify a table passing arguments to the backend to handle the heavy lifting
 
-This script will convert a static HTML table to an AJAX table with minimal effort. 
+A simple jQuery script to convert a static HTML table to an AJAX table with minimal effort. 
+
+
+SimpleTable can ajaxify a plain HTML table by passing arguments via an AJAX POST to the backend which handles the heavy lifting. SimpleTable sets up sortable headers and connects the pager links by adding handlers which intercept the events necessry to load the table data.
+
 All the processing and rendering is handled on the backend, even the pagination widget! The AJAX calls simply place the rendered HTML wherever you want it to go.
 
-There are historic reasons the code is setup this way, hence my need to keep the whole thing as close to plain HTML as possible.
 
-SimpleTable will setup sortable headers and connect a pager to navigate between pages.
+It does not an probably never will 'cache' the html rows, every action will result in a call to the server to grab the html for display. There are historic reasons the code is setup this way, hence my need to keep the whole thing as close to plain HTML as possible.
 
 Currently there is support for a Bootstrap3 pager, an info box to show number of records returned and total results etc., and the tbody which is where it inserts the raw html passed back from the server.
 
