@@ -1,18 +1,18 @@
-# SimpleTable
+# bigTable
 
-A simple jQuery script to convert a static HTML table to an AJAX table with minimal effort. 
+A lightweight jQuery script with delusions of grandeur which converts a static HTML table into an AJAX table with minimal effort. 
 
 
-SimpleTable can ajaxify a plain HTML table by passing arguments via an AJAX POST to the backend which handles the heavy lifting. SimpleTable sets up sortable headers and connects the pager links by adding handlers which intercept the events necessry to load the table data.
+bigTable can ajaxify a plain HTML table by passing arguments via an AJAX POST to the backend which handles the heavy lifting. bigTable sets up sortable headers and connects the pager links by adding handlers which intercept the events necessry to load the table data.
 
 All the processing and rendering is handled on the backend, even the pagination widget! The AJAX calls simply place the rendered HTML wherever you want it to go.
 
 
-It does not an probably never will 'cache' the html rows, every action will result in a call to the server to grab the html for display. There are historic reasons the code is setup this way, hence my need to keep the whole thing as close to plain HTML as possible.
+It does not 'cache' the received html rows, every action will result in a call to the server to grab the html for display. There are historic reasons the code is setup this way, hence my need to keep the whole thing as close to plain HTML as possible.
 
 Currently there is support for a Bootstrap3 pager, an info box to show number of records returned and total results etc., and the tbody which is where it inserts the raw html passed back from the server.
 
-When the user clicks a sortable header, navigates a page or submits the form SimpleTable will intercept, create a url with the search parameters and pass it back to the server. The server should generate three views in response, the info, the pager and the table body. It should return those wrapped in JSON for SimpleTable to paste into the page. 
+When the user clicks a sortable header, navigates a page or submits the form bigTable will intercept, create a url with the search parameters and pass it back to the server. The server should generate three views in response, the info, the pager and the table body. It should return those wrapped in JSON for bigTable to paste into the page. 
 
 Requires jQuery > 1.11 and FontAwesome for the table header icons, these can be replaced easily in the CSS file
 
@@ -26,12 +26,12 @@ Optionally requires FontAwesome and Bootstrap3 to make it pretty
 
 In your head place the link to the stylesheet
 ```html
-<link media="all" type="text/css" rel="stylesheet" href="/vendor/simpletable/simpletable.css">
+<link media="all" type="text/css" rel="stylesheet" href="/vendor/bigtable/bigtable.css">
 ```
 
 Ideally before the closing </body> tag place the link to the script
 ```html
-<script src="/vendor/simpletable/simpletable.js"></script>
+<script src="/vendor/bigtable/bigtable.js"></script>
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ Add this to your page in your script section:
 
 ```javascript
 $(function($){
-	$(".simpleTable").simpleTable({
+	$(".bigTable").bigTable({
 		infoContainer: '.st-info',
 		pagerContainer: '.st-pager',
 		pageSize: 25 
@@ -66,7 +66,7 @@ Add the table like so
 	<div class="st-info pull-left">
     <!-- Results summary info will be placed here -->
   </div>
-	<table class="simpleTable table table-condensed table-hover">
+	<table class="bigTable table table-condensed table-hover">
 		<thead>
 			<tr>
 				<th>User name</th>
@@ -86,7 +86,7 @@ Add the table like so
 </form>
 ```
 
-SimpleTable will look for your table header row (it only supports one row!) and will add a class .st-sortable to each <th> that does not have an attribute of data-sort="false" 
+bigTable will look for your table header row (it only supports one row!) and will add a class .st-sortable to each <th> that does not have an attribute of data-sort="false" 
 
 If your table header labels do not match your schema, use the data-name attribute as in the example to override the text.
 
@@ -141,4 +141,4 @@ I have two view files, one sets up the whole index page, the other is a partial 
 
 
 ### Todo
-Remove dependency on spinner function - use CSS and FontAwesome
+Add support for dropping columns at lower resolutions to make it more 'responsive'

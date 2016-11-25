@@ -1,6 +1,6 @@
 ;(function($) {
 
-	$.fn.simpleTable = function(options) {
+	$.fn.bigTable = function(options) {
 
 		// set defaults.
 		var settings = $.extend({
@@ -175,7 +175,7 @@
 			
 		}
 		
-		// setup handler to intercept simpletable header clicks
+		// setup handler to intercept bigTable header clicks
 		function tableHeaderCellHandler() {
 			// foreach header with data attr sortable
 			// 		store column data in headers
@@ -221,7 +221,7 @@
 			
 		}
 
-		// setup handler to intercept simpletable pagination links
+		// setup handler to intercept bigTable pagination links
 		function pagerLinkHandler() {
 			self.parent('form').find(settings.pagerContainer).find('a').each(function(i) {
 				$(this).on('click', function(e) {
@@ -250,7 +250,7 @@
 				// create url to fetch data with
 				url = form.attr('action');
 				
-				// init and add simpletable fields, 
+				// init and add bigTable fields, 
 				// page size, page number
 				// sort columns and other form fields
 				// getting late 

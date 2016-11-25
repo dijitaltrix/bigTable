@@ -1,18 +1,18 @@
-.simpleTable .st-sortable:after {
+.bigTable .bt-sortable:after {
 	content: '\f0dc';
 	color:#aaa;
 	font-family:"fontawesome";
 	padding:0 0 0 1em;
 	width:1px;
 }
-.simpleTable .st-sorted-asc:after {
+.bigTable .bt-sorted-asc:after {
 	content: '\f160';
 	color:#666;
 	font-family:"fontawesome";
 	padding:0 0 0 1em;
 	width:1px;
 }
-.simpleTable .st-sorted-desc:after {
+.bigTable .bt-sorted-desc:after {
 	content: '\f161';
 	color:#666;
 	font-family:"fontawesome";
