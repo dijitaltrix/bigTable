@@ -40,11 +40,7 @@ Add this to your page in your script section:
 
 ```javascript
 $(function($){
-	$(".bigTable").bigTable({
-		infoContainer: '.st-info',
-		pagerContainer: '.st-pager',
-		pageSize: 25 
-	});
+	$(".bigTable").bigTable();
 });
 ```
 
@@ -86,7 +82,7 @@ Add the table like so
 </form>
 ```
 
-bigTable will look for your table header row (it only supports one row!) and will add a class .st-sortable to each <th> that does not have an attribute of data-sort="false" 
+bigTable will look for your table header row (it only supports one row!) and will add a class .bt-sortable to each <th> that does not have an attribute of data-sort="false" 
 
 If your table header labels do not match your schema, use the data-name attribute as in the example to override the text.
 
