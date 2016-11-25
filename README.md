@@ -47,13 +47,17 @@ $(function($){
 Add the table like so
 
 ```html
+<!-- bigTable will use the action and method to fetch your data -->
 <form action="/users" method="post">
+	
 	<table class="bigTable table table-condensed table-hover">
 		<thead>
 			<tr>
 				<th>User name</th>
+				<!-- Do not sort the column below -->
 				<th data-sort="false">Roles</th>
-				<th data-sort="false">Email</th>
+				<th>Email</th>
+				<!-- Use the data-name attribute if your Header does not match the fieldname -->
 				<th data-name="updated_at">Last login</th>
 				<th>Status</th>
 			</tr>
