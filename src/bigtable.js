@@ -11,11 +11,11 @@
 			// size of results to fetch
 			pageSize: 25,
 			// pager container to display links
-			pagerContainer: '.st-pager',
+			pagerContainer: '.bt-pager',
 			// result summary information
-			infoContainer: '.st-info',	
+			infoContainer: '.bt-info',	
 			// page size input (must be able to call val())
-			pageSizeChooser: '.st-size',
+			pageSizeChooser: '.bt-size',
 			
 			// last item to stop me worrying about commas
 			z: null
@@ -33,9 +33,6 @@
 		// form data field object
 		var data = {};
 
-		// init
-		init();
-		
 		function init() {
 			tableHeaderCellHandler();
 			pageSizeHandler();
@@ -46,6 +43,9 @@
 				getData();
 			});
 		}
+
+		// init
+		init();
 		
 		// set/get the fetching data state
 		function gettingData(bool) {
@@ -61,7 +61,7 @@
 					
 					// set table state disabled
 					// disable table headers
-					self.children('thead').children('tr').children('.st-sortable').each(function() {
+					self.children('thead').children('tr').children('.bt-sortable').each(function() {
 						$(this).prop('disabled', true);
 					});
 					// disable pagination
@@ -80,7 +80,7 @@
 					// set table state enabled
 					
 					// enable table headers
-					self.children('thead').children('tr').children('.st-sortable').each(function() {
+					self.children('thead').children('tr').children('.bt-sortable').each(function() {
 						$(this).prop('disabled', false);
 					});
 					// enable pagination
@@ -103,7 +103,7 @@
 			
 		}
 		
-		// get next priority
+		// get next priority index used for column sort ordering
 		function getPriority() {
 			return priority++;
 		}
@@ -120,7 +120,7 @@
 			var pos;
 			var field;
 			var headers = [];
-			self.children('thead').children('tr').children('.st-sortable').each(function() {
+			self.children('thead').children('tr').children('.bt-sortable').each(function() {
 				if ($(this).data('sort-priority') !== undefined) {
 					// get position of sort order, to set order by in correct sequence
 					pos = $(this).data('sort-priority');
@@ -160,13 +160,24 @@
 			// window.location.hash = setQueryParam(window.location.search, 'page', page);
 		}
 		
+		// set responsive data tags
+		function setResponsive() {
+			var headers = this.find('thead').next('tr').find('th').text();
+			console.log(headers);
+			if (this.hasClass('bt-responsive')) {
+				// fetch column heading names
+				
+				this.children('tbody').children('tr');
+			}
+		}
+		
 		// merge additional form input to data
 		function addFormData() {
 			// console.log("called addFormData");
 			$(settings.form).find(':input').each(function(){
 				// console.log("addFormData: "+$(this).attr('name'));
 				if ($(this).attr('name') !== undefined) {
-					// exclude .st_size, need ! in_array()
+					// exclude .bt_size, need ! in_array()
 					if ($(this).attr('name') !== settings.pageSizeChooser) {
 						// console.log("adding");
 						data+= "&"+$(this).serialize();
@@ -297,14 +308,22 @@
 			if (response.view.pager) {
 				// console.log('updating pager');
 				self.parents('form').find(settings.pagerContainer).html(response.view.pager);
+			} else {
+				self.parents('form').find(settings.pagerContainer).html('');
 			}
 			// update table tbody
 			if (response.view.tbody) {
 				// console.log('updating tbody');
 				self.find('tbody').html(response.view.tbody);
+			} else {
+				self.find('tbody').html('');
 			}
+			
 			// set pager handler
 			pagerLinkHandler();
+			
+			// set responsive 
+			setResponsive();
 
 		}
 		
@@ -314,24 +333,24 @@
 		    var regex = new RegExp('[\\?&]' + key + '=([^&#]*)');
 		    var results = regex.exec(uri);
 		    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-		};
+		}
 		
 		// set a url parameter
 		// thanks to answer by http://stackoverflow.com/users/209568/adam
-		function setQueryParam(uri, key, value) {
-			var re = new RegExp("([?&])" + key + "=.*?(&|#|$)", "i");
-			if (uri.match(re)) {
-				return uri.replace(re, '$1' + key + "=" + value + '$2');
-			} else {
-				var hash =  '';
-				if ( uri.indexOf('#') !== -1 ){
-					hash = uri.replace(/.*#/, '#');
-					uri = uri.replace(/#.*/, '');
-				}
-				var separator = uri.indexOf('?') !== -1 ? "&" : "?";    
-				return uri + separator + key + "=" + value + hash;
-			}
-		}
+		// function setQueryParam(uri, key, value) {
+		// 	var re = new RegExp("([?&])" + key + "=.*?(&|#|$)", "i");
+		// 	if (uri.match(re)) {
+		// 		return uri.replace(re, '$1' + key + "=" + value + '$2');
+		// 	} else {
+		// 		var hash =  '';
+		// 		if ( uri.indexOf('#') !== -1 ){
+		// 			hash = uri.replace(/.*#/, '#');
+		// 			uri = uri.replace(/#.*/, '');
+		// 		}
+		// 		var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+		// 		return uri + separator + key + "=" + value + hash;
+		// 	}
+		// }
 
 	};
 
