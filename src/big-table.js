@@ -51,25 +51,25 @@
 		function gettingData(bool) {
 			
 			// set state
-			if (bool != undefined) {
-				console.log("Setting transfer to "+bool);
+			if (bool !== undefined) {
+				// console.log("Setting transfer to "+bool);
 				transfer = bool;
 				
-				if (transfer == 1) {
+				if (transfer === 1) {
 					// set pointer to timer
 					$("body").css("cursor", "progress");
 					
 					// set table state disabled
 					// disable table headers
-					self.children('thead').children('tr').children('.st-sortable').each(function(i) {
+					self.children('thead').children('tr').children('.st-sortable').each(function() {
 						$(this).prop('disabled', true);
 					});
 					// disable pagination
-					self.parent('form').find(settings.pagerContainer).find('a').each(function(i) {
+					self.parent('form').find(settings.pagerContainer).find('a').each(function() {
 						$(this).prop('disabled', true);
 					});
 					// disable search button
-					self.parent('form').find('button[type="submit"]').each(function(i) {
+					self.parent('form').find('button[type="submit"]').each(function() {
 						$(this).prop('disabled', true);
 					});
 					
@@ -80,15 +80,15 @@
 					// set table state enabled
 					
 					// enable table headers
-					self.children('thead').children('tr').children('.st-sortable').each(function(i) {
+					self.children('thead').children('tr').children('.st-sortable').each(function() {
 						$(this).prop('disabled', false);
 					});
 					// enable pagination
-					self.parent('form').find(settings.pagerContainer).find('a').each(function(i) {
+					self.parent('form').find(settings.pagerContainer).find('a').each(function() {
 						$(this).prop('disabled', false);
 					});
 					// enable search button
-					self.parent('form').find('button[type="submit"]').each(function(i) {
+					self.parent('form').find('button[type="submit"]').each(function() {
 						$(this).prop('disabled', false);
 					});
 				
@@ -98,7 +98,7 @@
 			}
 			
 			// return state
-			console.log("Returning transfer "+transfer);
+			// console.log("Returning transfer "+transfer);
 			return transfer;
 			
 		}
@@ -116,28 +116,31 @@
 		
 		// return the columns sort order
 		function getSort() {
-			headers = [];
-			self.children('thead').children('tr').children('.st-sortable').each(function(i) {
-				if ($(this).data('sort-priority') != undefined) {
+			var out;
+			var pos;
+			var field;
+			var headers = [];
+			self.children('thead').children('tr').children('.st-sortable').each(function() {
+				if ($(this).data('sort-priority') !== undefined) {
 					// get position of sort order, to set order by in correct sequence
 					pos = $(this).data('sort-priority');
 					// get field name for table, set from data-name attribute or text
-					if ($(this).data('sort-name') != undefined) {
+					if ($(this).data('sort-name') !== undefined) {
 						field = $(this).data('sort-name');
 					} else {
 						field = $(this).text().toLowerCase().replace(/ /, '_');
 					}
 					// get sort direct from data-sort attribute
-					if ($(this).data('sort-dir') == 'desc') {
-						field+= ':desc'
+					if ($(this).data('sort-dir') === 'desc') {
+						field+= ':desc';
 					} else {
-						field+= ':asc'
+						field+= ':asc';
 					}
 					headers[pos] = field;
 				}
 			});
 
-			console.log(headers);
+			// console.log(headers);
 			// sort header (not necessary?)
 			
 			// return formatted sort order and dir for each column
@@ -159,19 +162,19 @@
 		
 		// merge additional form input to data
 		function addFormData() {
-			console.log("called addFormData");
-			$(settings.form).find(':input').each(function(i){
-				console.log("addFormData: "+$(this).attr('name'));
-				if ($(this).attr('name') != undefined) {
+			// console.log("called addFormData");
+			$(settings.form).find(':input').each(function(){
+				// console.log("addFormData: "+$(this).attr('name'));
+				if ($(this).attr('name') !== undefined) {
 					// exclude .st_size, need ! in_array()
-					if ($(this).attr('name') != settings.pageSizeChooser) {
-						console.log("adding");
+					if ($(this).attr('name') !== settings.pageSizeChooser) {
+						// console.log("adding");
 						data+= "&"+$(this).serialize();
 					}
 				}
 			});
 			
-			console.log(data);
+			// console.log(data);
 			
 		}
 		
@@ -181,10 +184,8 @@
 			// 		store column data in headers
 			//		add to header, add class (with icon), add attr data-sort-dir
 			// 		set handler on each item
-			self.children('thead').children('tr').children('th[data-sort!="false"]').each(function(i) {
-				$(this)
-					.hover(function(){$(this).css('cursor', 'pointer')})	// should really set this in css
-					.addClass('st-sortable');
+			self.children('thead').children('tr').children('th[data-sort!="false"]').each(function() {
+				$(this).addClass('st-sortable');
 
 				// cycle through three states, null, asc, desc
 				// we should 
@@ -223,7 +224,7 @@
 
 		// setup handler to intercept bigTable pagination links
 		function pagerLinkHandler() {
-			self.parent('form').find(settings.pagerContainer).find('a').each(function(i) {
+			self.parent('form').find(settings.pagerContainer).find('a').each(function() {
 				$(this).on('click', function(e) {
 					e.preventDefault();
 					setPage(getQueryParam($(this).attr('href'), 'page'));
@@ -237,6 +238,8 @@
 		
 		// call remote data url then call render with the data
 		function getData() {
+			var url;
+			var form;
 			
 			// fetch should be a function to stop/allow state changes on table
 			
@@ -287,17 +290,17 @@
 			
 			// update info
 			if (response.view.info) {
-				console.log('updating info');
+				// console.log('updating info');
 				self.parents('form').find(settings.infoContainer).html(response.view.info);
 			}
 			// update pager
 			if (response.view.pager) {
-				console.log('updating pager');
+				// console.log('updating pager');
 				self.parents('form').find(settings.pagerContainer).html(response.view.pager);
 			}
 			// update table tbody
 			if (response.view.tbody) {
-				console.log('updating tbody');
+				// console.log('updating tbody');
 				self.find('tbody').html(response.view.tbody);
 			}
 			// set pager handler
