@@ -1,3 +1,5 @@
+@break: 48em;
+
 .bigTable {
 	// all <th> columns that can be sorted have this class
 	.bt-sortable:after {
@@ -27,4 +29,116 @@
 		padding: 0 0 0 1em;
 		width: 1px;
 	}
+	
+	//
+	// Responsiveness, lifted entirely from the demo below 
+	// With thanks to Charlie Cathcart - http://codepen.io/pixelchar/pen/rfuqK
+	//
+	
+	// hide header at small widths
+	thead {
+		// Accessibly hide <thead> on narrow viewports
+		position: absolute;
+		clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+		clip: rect(1px, 1px, 1px, 1px);
+		padding: 0;
+		border: 0;
+		height: 1px;
+		width: 1px;
+		overflow: hidden;
+    
+		@media (min-width: @break) {
+			// Unhide <thead> on wide viewports
+			position: relative;
+			clip: auto;
+			height: auto;
+			width: auto;
+			overflow: auto;
+		}
+    
+		th {
+			&:first-of-type {
+				text-align: left;
+			}
+
+		}
+
+	}
+	
+	// Set these items to display: block for narrow viewports
+	tbody,
+	tr,
+	th,
+	td {
+		display: block;
+		padding: 0;
+		text-align: left;
+		white-space: normal;
+	}
+  
+	tr {
+		@media (min-width: @break) {
+			// Undo display: block 
+			display: table-row;
+		}
+
+	}
+	
+	th,
+	td {
+		vertical-align: middle;
+    
+		@media (min-width: @break) {
+			// Undo display: block 
+			display: table-cell;
+		}
+
+	}
+	
+	tbody {
+		@media (min-width: @break) {
+			// Undo display: block 
+			display: table-row-group;
+		}
+    
+		tr {
+			// add border to visually separate rows
+			margin-bottom: 1em;
+			border: 1px solid #ccc;
+			border-bottom: 3px solid #ccc;
+      
+			@media (min-width: @break) {
+				// Undo display: block and remove border at full widths
+				display: table-row;
+				border: none;
+			}
+      
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+      
+
+		}
+    
+		td {
+			text-align: right;
+
+			@media (min-width: @break) {
+				text-align: inherit;
+			}
+
+		}
+    
+		td[data-title]:before {
+			content: attr(data-title);
+			float: left;
+			@media (min-width: @break) {
+				// Don’t show data-title labels 
+				content: none;
+			}
+
+		}
+
+	}
+
 }

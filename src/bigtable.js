@@ -162,12 +162,20 @@
 		
 		// set responsive data tags
 		function setResponsive() {
-			var headers = this.find('thead').next('tr').find('th').text();
-			console.log(headers);
-			if (this.hasClass('bt-responsive')) {
-				// fetch column heading names
-				
-				this.children('tbody').children('tr');
+			if (self.attr('data-responsive')) {
+				var headers = [];
+				// get header text values
+				self.find('thead').children('tr').find('th').each(function(i){
+					headers[i] = $(this).text();
+				});
+				// place header text in <td> data-title attribute
+				self.children('tbody').children('tr').each(function() {
+					$(this).find('td').each(function(i) {
+						if ($(this).text()) {
+							$(this).attr('data-title', headers[i]);
+						}
+					});
+				});
 			}
 		}
 		
