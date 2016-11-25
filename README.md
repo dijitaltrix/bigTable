@@ -48,20 +48,6 @@ Add the table like so
 
 ```html
 <form action="/users" method="post">
-	<div class="st-size pull-right form-inline">
-    <div class="form-group">
-      <label class="control-label">Items to show</label>
-      <select class="form-control">
-        <option value="15">15</option>
-        <option value="25" selected="selected">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-      </select>
-    </div>
-  </div>
-	<div class="st-info pull-left">
-    <!-- Results summary info will be placed here -->
-  </div>
 	<table class="bigTable table table-condensed table-hover">
 		<thead>
 			<tr>
@@ -78,6 +64,7 @@ Add the table like so
       <!-- table rows will be placed here -->
     </tbody>
 	</table>
+	<!-- pager html code will be inserted into the div below -->
 	<div class="st-pager pull-right"></div>
 </form>
 ```

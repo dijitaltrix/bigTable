@@ -22,6 +22,27 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h3>Basic example</h3>
+					
+					<!-- bigTable will use the action and method to fetch your data -->
+					<form action="/users" method="get">
+					
+					<table class="bigTable table table-condensed table-hover" data-responsive="true">
+						<thead>
+							<tr>
+								<th data-sort="false"><input id="checkAll" type="checkbox" value="all" title="Check all"></th>
+								<th data-name="reference" class="st-sortable">Username</th>
+								<th data-sort="false">Password</th>
+								<th data-sort="false">Social security</th>
+								<th data-name="amount" class="st-sortable">Salary</th>
+								<th data-sort="false">Address</th>
+								<th data-name="date" class="st-sortable">Date of birth</th>
+								<th data-name="status" class="st-sortable">Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- bigTable will insert your table rows here -->
+						</tbody>
+					</table>
 				</div>
 			</div>
 
@@ -35,9 +56,7 @@
 		<script src="../dist/bigtable.min.js"></script>
 		<script>
 		$(function() {
-			$('.bigTable').bigTable({
-				
-			});
+			$('.bigTable').bigTable();
 		});
 		</script>
 	</body>
