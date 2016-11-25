@@ -58,14 +58,14 @@ Add the table like so
 				<th>Status</th>
 			</tr>
 		</thead>
-		<tfoot>
-		</tfoot>
 		<tbody>
-      <!-- table rows will be placed here -->
-    </tbody>
+			<!-- table rows will be placed here -->
+		</tbody>
 	</table>
+	
 	<!-- pager html code will be inserted into the div below -->
 	<div class="st-pager pull-right"></div>
+
 </form>
 ```
 
